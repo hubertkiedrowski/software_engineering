@@ -2,9 +2,9 @@ import "./App.css";
 import React, { useState } from "react";
 
 import KeyboardInputField from "./components/KeyboardInputField";
-import Keyboard from "./assets/keyboard/keyboard";
+import Keyboard from "./components/keyboard.jsx";
 
 function App() {
-  return <Keyboard />;
+  return <KeyboardInputField />;
 }
 export default App;

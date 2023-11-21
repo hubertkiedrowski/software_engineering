@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from "react";
-import "./keyboard.css";
+import "./css/keyboard.css";
 const Keyboard = () => {
   return (
     <>
