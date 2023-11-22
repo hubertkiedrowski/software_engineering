@@ -18,8 +18,7 @@ function App() {
         <Route exact path="/ueberUns" element={< />} />
         <Route exact path="/login" element={< />} /> */}
 
-        <Route exact path="/keyboard" element={<Keyboard />} />
-        <Route exact path="/input" element={<KeyboardInputField />} />
+        <Route exact path="/" element={<Keyboard />} />
       </Routes>
     </Router>
   );
