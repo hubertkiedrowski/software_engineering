@@ -1,7 +1,46 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./css/keyboard.css";
 const Keyboard = () => {
+  const [pressedKey, setPressedKey] = useState(null);
+
+  const handleKeyDown = () => {
+    const keyCode = event.keyCode;
+    setPressedKey(keyCode);
+    const keyElement = document.querySelector(`.key.c${keyCode}`);
+    if (keyElement) {
+      keyElement.style.color = "#888";
+      keyElement.style.background = "#222";
+      keyElement.style.margin = "7px 5px 3px";
+      keyElement.style.boxShadow = "inset 0 0 25px #333, 0 0 3px #333";
+      keyElement.style.borderTop = "1px solid #000";
+    }
+  };
+
+  const handleKeyUp = () => {
+    const keyElement = document.querySelector(`.key.c${pressedKey}`);
+    if (keyElement) {
+      keyElement.style.color = "#aaa";
+      keyElement.style.background = "#922";
+      keyElement.style.margin = "7px 5px 3px";
+      keyElement.style.boxShadow = "inset 0 0 25px #333, 0 0 3px #333";
+      keyElement.style.borderTop = "1px solid #000";
+      keyElement.style.color = "blue";
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+  const handleInputChange = (event) => {
+    console.log("Input changed");
+  };
   return (
     <>
       <div id="keyboard">
@@ -226,7 +265,7 @@ const Keyboard = () => {
           </li>
           <li>
             <a href="#" className="key c221 alt">
-              <b>&rbrace;</b>
+              <b>foo</b>
               <span>]</span>
             </a>
           </li>
@@ -427,6 +466,9 @@ const Keyboard = () => {
             </li>
           </ol>
         </ul>
+      </div>
+      <div>
+        <input onChange={handleInputChange}></input>
       </div>
       <cite> </cite>
     </>
