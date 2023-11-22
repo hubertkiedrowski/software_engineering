@@ -4,40 +4,46 @@ import "./css/keyboard.css";
 const Keyboard = () => {
   const [pressedKey, setPressedKey] = useState(null);
 
-  const handleKeyDown = () => {
+  const handleKeyDown = (event) => {
     const keyCode = event.keyCode;
     setPressedKey(keyCode);
     const keyElement = document.querySelector(`.key.c${keyCode}`);
     if (keyElement) {
-      keyElement.style.color = "#888";
-      keyElement.style.background = "#222";
+      keyElement.style.color = "#007fff";
+      keyElement.style.textShadow = "0 0 10px #007fff";
       keyElement.style.margin = "7px 5px 3px";
       keyElement.style.boxShadow = "inset 0 0 25px #333, 0 0 3px #333";
       keyElement.style.borderTop = "1px solid #000";
     }
   };
 
-  const handleKeyUp = () => {
+  const handleKeyUp = (event) => {
+    const keyCode = event.keyCode;
+
     const keyElement = document.querySelector(`.key.c${pressedKey}`);
     if (keyElement) {
       keyElement.style.color = "#aaa";
-      keyElement.style.background = "#922";
+      keyElement.style.textShadow = "none";
       keyElement.style.margin = "7px 5px 3px";
-      keyElement.style.boxShadow = "inset 0 0 25px #333, 0 0 3px #333";
+      keyElement.style.boxShadow = "0 0 25px #333, 0 0 3px #333";
       keyElement.style.borderTop = "1px solid #000";
-      keyElement.style.color = "blue";
+      setPressedKey(keyCode);
     }
   };
 
   useEffect(() => {
+    console.log("Effect initialized");
+
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
 
     return () => {
+      console.log("Cleanup");
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
     };
-  }, []);
+  }, [pressedKey]);
+
   const handleInputChange = (event) => {
     console.log("Input changed");
   };
@@ -233,8 +239,8 @@ const Keyboard = () => {
             </a>
           </li>
           <li>
-            <a href="#" className="key c89">
-              <span>y</span>
+            <a href="#" className="key c90">
+              <span>z</span>
             </a>
           </li>
           <li>
@@ -353,8 +359,8 @@ const Keyboard = () => {
             </a>
           </li>
           <li>
-            <a href="#" className="key c90">
-              <span>z</span>
+            <a href="#" className="key c89">
+              <span>y</span>
             </a>
           </li>
           <li>
