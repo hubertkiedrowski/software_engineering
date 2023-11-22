@@ -20,7 +20,8 @@ const Keyboard = () => {
   const handleKeyUp = (event) => {
     const keyCode = event.keyCode;
 
-    const keyElement = document.querySelector(`.key.c${pressedKey}`);
+    const keyElement = document.querySelector(`.key.c${keyCode}`);
+
     if (keyElement) {
       keyElement.style.color = "#aaa";
       keyElement.style.textShadow = "none";
@@ -32,21 +33,15 @@ const Keyboard = () => {
   };
 
   useEffect(() => {
-    console.log("Effect initialized");
-
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
 
     return () => {
-      console.log("Cleanup");
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
     };
   }, [pressedKey]);
 
-  const handleInputChange = (event) => {
-    console.log("Input changed");
-  };
   return (
     <>
       <div id="keyboard">
@@ -472,9 +467,6 @@ const Keyboard = () => {
             </li>
           </ol>
         </ul>
-      </div>
-      <div>
-        <input onChange={handleInputChange}></input>
       </div>
       <cite> </cite>
     </>
