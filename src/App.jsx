@@ -8,22 +8,20 @@ import {
 } from "react-router-dom";
 import KeyboardInputField from "./components/KeyboardInputField";
 import Keyboard from "./components/keyboard.jsx";
-import Navbar from './components/navbar';
+import Navbar from './components/navbar.jsx';
 
 function App() {
   return (
     <>
-  
-       <div>
+      <Navbar/>
+
        <Router>
           <Routes>
-            <Route exact path="/" element={<home/>} />
-            <Route exact path="/login" element={<login />} />
-            <Route exact path="/ueberUns" element={<ueberuns />} />
             <Route exact path="/keyboard" element={<Keyboard />} />
+            
           </Routes>
         </Router>
-       </div>
+
     </>
    
   );

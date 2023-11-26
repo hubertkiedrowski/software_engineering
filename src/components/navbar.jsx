@@ -5,22 +5,28 @@ const Navbar = () => {
 
     return (
         <>
-            <div>
+            <nav>
                 <ul>
                     <li>
-                        <Link to="/home">Home</Link>
-                    </li>
+                        <Link to="/">Home</Link>
+                    </li> 
+                </ul>
+                <ul>
+                    <li>
+                        <Link to="/ueberuns">Über Uns</Link>
+                    </li> 
+                </ul>
+                <ul>
                     <li>
                         <Link to="/keyboard">Keyboard</Link>
-                    </li>
-                    <li>
-                        <Link to="/ueberuns">Über uns</Link>
-                    </li>
-                    <li>
-                        <Link to="/login">Login</Link>
-                    </li>
+                    </li> 
                 </ul>
-            </div>
+                <ul>
+                    <li>
+                        <Link to="/input">Input</Link>
+                    </li> 
+                </ul>
+            </nav>
         </>
     );
 }
