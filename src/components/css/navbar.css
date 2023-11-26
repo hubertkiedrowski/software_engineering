@@ -1,0 +1,40 @@
+nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 70%; /* Vollständige Breite des Viewports */
+    background-color: #333; /* Hintergrundfarbe anpassen */
+    padding: 10px; /* Optional: Abstand zum Inhalt hinzufügen */
+    display: flex;
+    justify-content: center;
+    margin: 0 auto; /* Hinzugefügt: Zentriert die Navbar horizontal */
+  }
+
+  .schrift{
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 30px;
+    color: black;
+  }
+
+  .schrift:hover{
+    color: whitesmoke;
+  }
+
+  .container3 {
+    display: flex;
+    justify-content: center;
+  }
+
+.container{
+    display: grid;
+}
+
+.container1{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.ul{
+    border: 10px solid green;
+}
