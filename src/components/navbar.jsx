@@ -2,32 +2,27 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+
     return (
         <>
-            <nav>
+            <div>
                 <ul>
-                    <li className="nav-item">
-                        <Link to="/">Home</Link>
-                    </li> 
-                </ul>
-                <ul>
-                    <li className="nav-item">
-                        <Link to="/ueberuns">Über Uns</Link>
-                    </li> 
-                </ul>
-                <ul>
-                    <li className="nav-item">
+                    <li>
+                        <Link to="/home">Home</Link>
+                    </li>
+                    <li>
                         <Link to="/keyboard">Keyboard</Link>
-                    </li> 
+                    </li>
+                    <li>
+                        <Link to="/ueberuns">Über uns</Link>
+                    </li>
+                    <li>
+                        <Link to="/login">Login</Link>
+                    </li>
                 </ul>
-                <ul>
-                    <li className="nav-item">
-                        <Link to="/input">Input</Link>
-                    </li> 
-                </ul>
-            </nav>
+            </div>
         </>
     );
-};
+}
 
 export default Navbar;
