@@ -19,19 +19,20 @@ const Keyboard = () => {
 
   const handleKeyUp = (event) => {
     const keyCode = event.keyCode;
-
+    console.log(keyCode);
     const keyElement = document.querySelector(`.key.c${keyCode}`);
 
     if (keyElement) {
       keyElement.style.color = "#aaa";
       keyElement.style.textShadow = "none";
-      keyElement.style.margin = "7px 5px 3px";
+      keyElement.style.margin = "5px 5px 3px";
       keyElement.style.boxShadow = "0 0 25px #333, 0 0 3px #333";
+      keyElement.style.boxShadow = "inset 0 0 25px #333, 0 0 3px #333";
+
       keyElement.style.borderTop = "1px solid #000";
       setPressedKey(keyCode);
     }
   };
-
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
