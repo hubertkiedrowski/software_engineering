@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
+  Navigate
 } from "react-router-dom";
 import KeyboardInputField from "./components/KeyboardInputField";
 import Keyboard from "./components/keyboard.jsx";
