@@ -13,7 +13,7 @@ nav {
 
   .schrift{
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 30px;
+    font-size: 25px;
     color: black;
   }
 
@@ -28,6 +28,7 @@ nav {
 
 .container{
     display: grid;
+    border: 1px solid black;
 }
 
 .container1{
