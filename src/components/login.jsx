@@ -2,15 +2,15 @@ import React from 'react';
 import "./css/navbar.css";
 import { Link } from 'react-router-dom';
 
-const ueberUns = () => {
+const Login = () => {
 
     return (
         <>  
             <div>
-                <p>Über uns</p>
+                <p>Login</p>
             </div>
         </>
     );
 }
 
-export default ueberUns;
+export default Login;
