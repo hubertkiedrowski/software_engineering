@@ -8,16 +8,19 @@ react
 eslint
 
 einrichten und starten:
+einrichten:
+npm ci
 
-npm install
+
 npm run dev
 
 unter src/components findet man die react komponenten
 
 //TODO
-tastatur mit code verbinden(tastenanschläge anzeigen)
+datenbank anlegen
+
 Leaderboard
-redirecting
+
 Zeitmessung / competetive
 
 unittest /playwright
