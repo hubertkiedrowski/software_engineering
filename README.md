@@ -2,9 +2,10 @@
 
 https://reactrouter.com/en/main/hooks/use-navigate
 
-gitignore
-
-muss noch installiert werden
+used frameworks: 
+typeorm
+react
+eslint
 
 einrichten und starten:
 
@@ -20,3 +21,7 @@ redirecting
 Zeitmessung / competetive
 
 unittest /playwright
+
+https://github.com/samchon/typia        formvalidation
+
+https://github.com/typeorm/typeorm      orn mapping ähnlich wie in prog2 nur für typescript

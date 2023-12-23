@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 const KeyboardInputField = () => {
   const [userSampleInput, setUserSampleInput] = useState("");
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
     const currentInput = event.target.value;
     const lastTypedChar = currentInput.slice(-1);
     setUserSampleInput(lastTypedChar);

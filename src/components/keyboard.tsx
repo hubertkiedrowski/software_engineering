@@ -1,13 +1,16 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useEffect, useState } from "react";
 import "./css/keyboard.css";
+import { newUser } from "../entitys/insertUser";
+
 const Keyboard = () => {
   const [pressedKey, setPressedKey] = useState(null);
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: { keyCode: any; }) => {
+
     const keyCode = event.keyCode;
     setPressedKey(keyCode);
-    const keyElement = document.querySelector(`.key.c${keyCode}`);
+    const keyElement = document.querySelector(`.key.c${keyCode}`) as HTMLElement;
     if (keyElement) {
       keyElement.style.color = "#007fff";
       keyElement.style.textShadow = "0 0 10px #007fff";
@@ -17,10 +20,10 @@ const Keyboard = () => {
     }
   };
 
-  const handleKeyUp = (event) => {
+  const handleKeyUp = (event: { keyCode: any; }) => {
     const keyCode = event.keyCode;
     console.log(keyCode);
-    const keyElement = document.querySelector(`.key.c${keyCode}`);
+    const keyElement = document.querySelector(`.key.c${keyCode}`) as HTMLElement;
 
     if (keyElement) {
       keyElement.style.color = "#aaa";
@@ -261,7 +264,7 @@ const Keyboard = () => {
           </li>
           <li>
             <a href="#" className="key c219 alt">
-              <b>{}</b>
+              <b>{ }</b>
               <span>[</span>
             </a>
           </li>
