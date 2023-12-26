@@ -12,10 +12,10 @@ yarn-error.log*
 # Dependency directories
 node_modules/
 jspm_packages/
-prisma/
 # Optional npm cache directory
+
 .npm
-.db
+
 # Output of 'npm pack'
 *.tgz
 
@@ -38,3 +38,5 @@ public
 *.sublime-project
 *.sublime-workspace
 sftp-config.json
+#databse
+dev.db
