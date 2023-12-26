@@ -12,6 +12,7 @@ import Navbar from "./components/navbar";
 import Home from "./components/home";
 import Ueberuns from "./components/ueberUns";
 import Login from "./components/login";
+import Leaderboard from "./components/leaderboard";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/ueberuns" element={<Ueberuns />} />
         <Route exact path="/keyboard" element={<Keyboard />} />
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/leaderboard" element={<Leaderboard />} />
       </Routes>
     </Router>
   );

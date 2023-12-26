@@ -1,6 +1,6 @@
-import React from 'react';
-import "./css/navbar.css";
-import { Link } from 'react-router-dom';
+import React from 'react'
+import "./css/navbar.css"
+import { Link } from 'react-router-dom'
 
 const ueberUns = () => {
 
@@ -8,6 +8,7 @@ const ueberUns = () => {
         <>
             <div>
                 <p>Über uns</p>
+                
             </div>
         </>
     );

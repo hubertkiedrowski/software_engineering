@@ -6,14 +6,14 @@ export class leaderboard extends BaseEntity {
   id!: number;
 
   @Column()
-  hightscoreRanking: number | undefined;
+  highscoreRanking: number | undefined;
 
   @Column()
   username: string | undefined;
 
   @Column()
-  hightscoreTime: number | undefined;
+  highscoreTime: number | undefined;
 
   @Column()
-  hightscorevalue: number | undefined;
+  highscorevalue: number | undefined;
 }
