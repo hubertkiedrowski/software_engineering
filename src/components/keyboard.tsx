@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useEffect, useState } from "react";
 import "./css/keyboard.css";
-import { newUser } from "../entitys/insertUser";
 
 const Keyboard = () => {
   const [pressedKey, setPressedKey] = useState(null);
@@ -18,6 +17,7 @@ const Keyboard = () => {
       keyElement.style.boxShadow = "inset 0 0 25px #333, 0 0 3px #333";
       keyElement.style.borderTop = "1px solid #000";
     }
+
   };
 
   const handleKeyUp = (event: { keyCode: any; }) => {
