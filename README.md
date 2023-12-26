@@ -3,28 +3,36 @@
 https://reactrouter.com/en/main/hooks/use-navigate
 
 used frameworks: 
-typeorm
+prisma
 react
 eslint
 
 einrichten und starten:
-einrichten:
+```
+install dependencies:
 npm ci
 
+server:
+npm run server
+
+frontend:
+npm run dev
+
+prisma: 
+npm run prisma-migrate
+npm run prisma-generate
+npm run prisma-seed
+
+npm run prisma-studio
+```
 
 npm run dev
 
 unter src/components findet man die react komponenten
 
-//TODO
-datenbank anlegen
 
 Leaderboard
 
 Zeitmessung / competetive
 
 unittest /playwright
-
-https://github.com/samchon/typia        formvalidation
-
-https://github.com/typeorm/typeorm      orn mapping ähnlich wie in prog2 nur für typescript

@@ -4,7 +4,6 @@ import "./css/keyboard.css";
 
 const Keyboard = () => {
   const [pressedKey, setPressedKey] = useState(null);
-  // newUser("d", "d", ";", "d", "d")
   const handleKeyDown = (event: { keyCode: any; }) => {
 
     const keyCode = event.keyCode;
