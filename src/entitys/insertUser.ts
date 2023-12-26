@@ -4,7 +4,7 @@ import { leaderboard } from "./leaderboard";
 
 export const appDataSource = new DataSource({
   type: "sqlite",
-  database: "database",
+  database: "database.sqlite",
   logging: true,
   synchronize: true,
   entities: [user, leaderboard],
@@ -24,18 +24,21 @@ export async function newUser(
   username: string,
   mail: string,
   secredPassword: string
-): Promise<user> {
-  const newUser = new user();
-  newUser.firstName = firstName;
-  newUser.lastName = lastName;
-  newUser.username = username;
-  newUser.mail = mail;
-  newUser.secredPassword = secredPassword;
+): Promise<user | null> {
+  try {
+    const newUser = new user();
+    newUser.firstName = firstName;
+    newUser.lastName = lastName;
+    newUser.username = username;
+    newUser.mail = mail;
+    newUser.secredPassword = secredPassword;
 
-  const foo = appDataSource.getRepository(user);
-  console.log(foo);
-  await foo.save(newUser);
+    const userRepository = appDataSource.getRepository(user);
+    await userRepository.save(newUser);
 
-  return newUser;
+    return newUser;
+  } catch (error) {
+    console.error("Error creating new user:", error);
+    return null;
+  }
 }
-function userAlterProgress(username: string) {}
