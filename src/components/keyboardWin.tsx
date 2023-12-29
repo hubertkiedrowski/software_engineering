@@ -4,6 +4,47 @@ import "./css/keyboardWin.css";
 
 const KeyboardWin = () => {
 
+    const [pressedKey, setPressedKey] = useState(null);
+    const handleKeyDown = (event: { keyCode: any; }) => {
+
+        const keyCode = event.keyCode;
+        setPressedKey(keyCode);
+        const keyElement = document.querySelector(`.key.c${keyCode}`) as HTMLElement;
+        if (keyElement) {
+            keyElement.style.color = "#007fff";
+            keyElement.style.textShadow = "0 0 10px #007fff";
+            keyElement.style.margin = "0px";
+            keyElement.style.boxShadow = "inset 0 0 25px #333, 0 0 3px #333";
+            keyElement.style.borderTop = "1px solid #000";
+        }
+
+    };
+
+    const handleKeyUp = (event: { keyCode: any; }) => {
+        const keyCode = event.keyCode;
+        console.log(keyCode);
+        const keyElement = document.querySelector(`.key.c${keyCode}`) as HTMLElement;
+
+        if (keyElement) {
+            keyElement.style.color = "#aaa";
+            keyElement.style.textShadow = "none";
+            keyElement.style.margin = "0px";
+            keyElement.style.boxShadow = "0 0 25px #333, 0 0 3px #333";
+            keyElement.style.boxShadow = "inset 0 0 25px #333, 0 0 3px #333";
+
+            keyElement.style.borderTop = "1px solid #000";
+            setPressedKey(keyCode);
+        }
+    };
+    useEffect(() => {
+        document.addEventListener("keydown", handleKeyDown);
+        document.addEventListener("keyup", handleKeyUp);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+            document.removeEventListener("keyup", handleKeyUp);
+        };
+    }, [pressedKey]);
 
     return (
         <>
