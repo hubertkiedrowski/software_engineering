@@ -2,7 +2,7 @@ import React from 'react';
 import "./css/login.css";
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const Regist = () => {
 
     return (
         <>  
@@ -10,7 +10,7 @@ const Login = () => {
 
                 <div className="formular">
 
-                <h2>Login</h2>
+                <h2>Regist</h2>
 
                 <form action="login" method="post">
 
@@ -24,7 +24,7 @@ const Login = () => {
 
                     <button type="submit">Login</button>
 
-                    <a href="./components/regist">
+                    <a href="">
                         <button >Regist</button>
                     </a>
 
@@ -37,4 +37,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Regist;
