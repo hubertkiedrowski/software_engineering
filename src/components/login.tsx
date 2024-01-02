@@ -1,8 +1,18 @@
 import React from 'react';
 import "./css/login.css";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+    const navigate = useNavigate();
+
+    const handleButtonClick = () => {
+
+        const targetPage = '/regist';
+
+        navigate(targetPage);
+
+    }
 
     return (
         <>  
@@ -24,9 +34,7 @@ const Login = () => {
 
                     <button type="submit">Login</button>
 
-                    <a href="/regist">
-                        <button >Regist</button>
-                    </a>
+                    <button onClick={handleButtonClick}>Regist</button>
 
                 </form>
 
