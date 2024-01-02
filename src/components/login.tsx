@@ -24,7 +24,7 @@ const Login = () => {
 
                     <button type="submit">Login</button>
 
-                    <a href="./components/regist">
+                    <a href="/regist">
                         <button >Regist</button>
                     </a>
 
