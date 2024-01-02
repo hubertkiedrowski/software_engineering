@@ -14,9 +14,9 @@ const KeyboardWin = () => {
         if (keyElement) {
             keyElement.style.color = "#007fff";
             keyElement.style.background = "#c20f0f";
-            keyElement.style.textShadow = "0 0 10px #007fff";
+            keyElement.style.textShadow = "0 0 5px #007fff";
             keyElement.style.margin = "0px";
-            keyElement.style.boxShadow = "inset 0 0 25px #333, 0 0 3px #333";
+            keyElement.style.boxShadow = "inset 0 0 15px #333, 0 0 3px #333";
             keyElement.style.borderTop = "1px solid #000";
         }
 
@@ -28,23 +28,19 @@ const KeyboardWin = () => {
         const keyElement = document.querySelector(`.keyWin.c${keyCode}`) as HTMLElement;
         
         if (keyElement) {
-            keyElement.style.width = "40px";
-            keyElement.style.height = "40px";
-            keyElement.style.display = "block";
+            keyElement.style.color = "#fff";
             keyElement.style.background = "#333";
-            keyElement.style.text-align = "left";
-            keyElement.style.padding-left = "8px";
-            keyElement.style.line-height = "29px";
-            keyElement.style.border-radius = "2px";
-            keyElement.style.margin-bottom ="2px";
-            keyElement.style.float = "left";
-            keyElement.style.margin = "2px";
-            keyElement.style.cursor = "pointer";
-            keyElement.style.transition = "box-shadow 0.7s ease";
+            keyElement.style.textShadow = "";
+            keyElement.style.marginLeft = "2px";
+            keyElement.style.marginBottom = "2px";
+            keyElement.style.boxShadow = "";
+            keyElement.style.borderTop = "";
+
             
             setPressedKey(keyCode);
         }
     };
+
     useEffect(() => {
         document.addEventListener("keydown", handleKeyDown);
         document.addEventListener("keyup", handleKeyUp);
