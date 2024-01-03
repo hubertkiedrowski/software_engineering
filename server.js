@@ -6,43 +6,107 @@ const port = 3000
 
 const prisma = new PrismaClient();
 
-app.get('/keyboard/:ID', async (req, res) => {
-  const user = await prisma.user.findFirst({
-    where: { ID: Number(req.params.ID) },
-  })
-  res.json({ data: user.firstName, data: user.lastName })
-})
+app.use(express.json());
 
-app.get('/leaderboard/:userID', async (req, res) => {
-  const user = await prisma.point.findFirst({
-    where: { userID: Number(req.params.userID) },
-  })
-  res.json({ data: user.score })
-})
+app.post('/users/:userID', async (req, res) => {
+  const { userID } = req.body;
 
-//get first / lastname
-app.get('/home/:ID', async (req, res) => {
+  try {
+    const user = await prisma.user.findFirst({
+      where: { id: userID },
+    });
+
+    if (user) {
+      res.json({ user });
+    } else {
+      res.status(404).json({ error: 'Benutzer nicht gefunden' });
+    }
+  } catch (error) {
+    console.error('Fehler beim Abfragen des Benutzers:', error);
+    res.status(500).json({ error: 'Serverfehler' });
+  }
+});
+
+
+
+app.get('/users/:userID', async (req, res) => {
+  const userID = Number(req.params.userID)
   const user = await prisma.user.findFirst({
-    where: { ID: Number(req.params.ID) },
+    where: { id: userID },
   })
   res.json({ firstName: user.firstName, lastName: user.lastName })
 })
+// Findet die obersten x Punktestände 
+app.get('/points/leaderboard/:topX', async (req, res) => {
+  const topX = Number(req.params.topX);
 
-//TODO  
-//wie sieht die url bei pw eingabe genau aus??
-app.get('/login/:ID:password', async (req, res) => {
-  const user = await prisma.user.findFirst({
-    where: { ID: Number(req.params.ID) },
-
-  })
-  if (req.params.password == user.password) {
-    //hier noch ein delay
-    // passwort ist nicht verschlüsselt und auslesbar
-    res.json({ data: user })
+  try {
+    const topScores = await prisma.point.findMany({
+      take: topX,
+      orderBy: {
+        score: 'desc', // Sortiere absteigend nach Punktestand
+      },
+      include: {
+        user: true, // Dies nimmt die Benutzerinformationen mit auf
+      },
+    });
+    res.json({ data: topScores });
+  } catch (error) {
+    console.error('Fehler beim Abfragen der Punktestände:', error);
+    res.status(500).json({ error: 'Serverfehler' });
   }
+});
+
+
+
+// Alle Punktestände eines Benutzers
+app.get('/points/:userID', async (req, res) => {
+  const userID = Number(req.params.userID);
+
+  try {
+    const userScores = await prisma.point.findMany({
+      where: { userId: userID }, // Verwenden Sie hier 'userId' anstelle von 'id'
+      orderBy: {
+        score: 'desc', // Sortiere absteigend nach Punktestand
+      },
+    });
+
+    res.json({ data: userScores });
+  } catch (error) {
+    console.error('Fehler beim Abfragen der Punktestände:', error);
+    res.status(500).json({ error: 'Serverfehler' });
+  }
+});
+
+//get username
+app.get('/username/:userID', async (req, res) => {
+  const userID = Number(req.params.userID)
+
+  const user = await prisma.user.findFirst({
+    where: { id: Number(userID) },
+  })
+  res.json({ firstName: user.userName })
 })
 
-app.post(() => { });
+//get firstname
+app.get('/firstname/:userID', async (req, res) => {
+  const userID = Number(req.params.userID)
+
+  const user = await prisma.user.findFirst({
+    where: { id: Number(userID) },
+  })
+  res.json({ firstName: user.firstName })
+})
+
+//get lastname
+app.get('/lastname/:userID', async (req, res) => {
+  const userID = Number(req.params.userID)
+
+  const user = await prisma.user.findFirst({
+    where: { id: Number(userID) },
+  })
+  res.json({ lastName: user.lastName })
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
