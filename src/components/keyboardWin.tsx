@@ -13,7 +13,6 @@ const KeyboardWin = () => {
 
         if (keyElement) {
             keyElement.style.color = "#007fff";
-            keyElement.style.background = "#c20f0f";
             keyElement.style.textShadow = "0 0 5px #007fff";
             keyElement.style.margin = "0px";
             keyElement.style.boxShadow = "inset 0 0 15px #333, 0 0 3px #333";
