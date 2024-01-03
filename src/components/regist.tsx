@@ -25,22 +25,22 @@ const Regist = () => {
                 <form action="login" method="post">
 
                     <label className="innerForm" >Firstname</label>
-                    <input className="innerForm" type="text" />
+                    <input name="firstname" className="innerForm" type="text" />
 
-                    <label className="innerForm" >Name</label>
-                    <input className="innerForm" type="text" />
+                    <label className="innerForm" >Lastname</label>
+                    <input name="lastname" className="innerForm" type="text" />
 
                     <label className="innerForm" >E-Mail</label>
-                    <input className="innerForm" type="text" />
+                    <input name="email" className="innerForm" type="text" />
 
                     <label className="innerForm" >Username</label>
-                    <input className="innerForm" type="text" />
+                    <input name="username" className="innerForm" type="text" />
 
                     <label className="innerForm" >Password</label>
-                    <input className="innerForm" type="password" />
+                    <input name="password" className="innerForm" type="password" />
 
                     <label className="innerForm" >Repeat Password</label>
-                    <input className="innerForm" type="password" />
+                    <input name="repeatpassword" className="innerForm" type="password" />
 
 
                     <a href="" className="forget">Forget password?</a>

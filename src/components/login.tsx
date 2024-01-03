@@ -25,10 +25,10 @@ const Login = () => {
                 <form action="login" method="post">
 
                     <label className="innerForm" >Username</label>
-                    <input className="innerForm" type="text" />
+                    <input name="username" className="innerForm" type="text" />
 
                     <label className="innerForm" >Password</label>
-                    <input className="innerForm" type="password" />
+                    <input name="password" className="innerForm" type="password" />
 
                     <a href="" className="forget">Forget password?</a>
 
