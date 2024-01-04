@@ -3,25 +3,23 @@ import "./css/regist.css";
 import { Link, useNavigate } from 'react-router-dom';
 
 interface FormData {
-    firstname: string;
-    lastname: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    username: string;
+    userName: string;
     password: string;
     repeatpassword: string,
   }
 
 const Regist = () => {
 
-    let responseOK = false;
-
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState<FormData>({
-        firstname: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         email: '',
-        username: '',
+        userName: '',
         password: '',
         repeatpassword: '',
     });
@@ -87,7 +85,7 @@ const Regist = () => {
                     <input 
                         type="text"
                         name="firstname" 
-                        value={formData.firstname}
+                        value={formData.firstName}
                         onChange={handleInputChange}
                         className="innerForm" />
 
@@ -95,13 +93,13 @@ const Regist = () => {
                     <input 
                         type="text"
                         name="lastname" 
-                        value={formData.lastname}
+                        value={formData.lastName}
                         onChange={handleInputChange}
                         className="innerForm" />
 
                     <label className="innerForm" >E-Mail</label>
                     <input 
-                        type="text"
+                        type="email"
                         name="email" 
                         value={formData.email}
                         onChange={handleInputChange}
@@ -111,7 +109,7 @@ const Regist = () => {
                     <input 
                         type="text"
                         name="username" 
-                        value={formData.username}
+                        value={formData.userName}
                         onChange={handleInputChange}
                         className="innerForm" />
 

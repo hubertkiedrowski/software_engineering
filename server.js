@@ -25,6 +25,17 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
+app.get('/getUserId', async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    res.status(200).json({ userId });
+  } catch (error) {
+    console.error('Fehler beim Abrufen der Benutzer-ID:', error);
+    res.status(500).json({ message: 'Interner Serverfehler' });
+  }
+});
+
 // Regist
 app.post('/regist', async (req, res) => {
   const{ firstname, lastname, email, username, password, repeatpassword } = req.body;
@@ -66,14 +77,17 @@ app.post('/regist', async (req, res) => {
 })
 
 // Login
-app.post('/login', async (req, res) => {
-  const {username, password} = req.body;
+app.post('/loginErfolgreich', async (req, res) => {
+  const {userId, userName, password} = req.body;
 
   try {
 
     const user = await prisma.user.findUnique({
-      where: { username },
-    })
+      where: {
+        id: userId,
+        userName: userName
+      },
+    });
 
     if(!user){
       return res.status(401).json({ message: 'Ungültige Anmeldeinformationen' });
@@ -83,7 +97,7 @@ app.post('/login', async (req, res) => {
 
     if(passwordMatch) {
 
-      res.status(200).json({ message: 'Erfolgreiche Anmeldung!'})
+      res.status(200).json({ userId: user.id, userName: user.userName })
       console.log("Login erfolgreich!");
 
     } else {
