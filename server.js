@@ -1,5 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
+import cors from 'cors';
 import { PrismaClient } from "@prisma/client";
 
 const app = express()
@@ -20,6 +21,8 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
+app.use(cors());
+
 // Regist
 app.post('/regist', async (req, res) => {
   const{ firstname, lastname, email, username, password, repeatpassword } = req.body;
@@ -28,10 +31,9 @@ app.post('/regist', async (req, res) => {
 
     try {
     
-      const hashedPassword = await bcrypt.hash(password);
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-      // Speicher benutzer in datenbank
-
+      // Speicher User in datenbank
       const user = await prisma.user.create({
         data: {
           email: email,
@@ -43,6 +45,7 @@ app.post('/regist', async (req, res) => {
       });
 
       res.status(201).json({ message: 'Benutzer erfolreich Registriert!'})
+      console.log("Regist erfolgreich!");
       
     } catch (error) {
 
@@ -79,11 +82,13 @@ app.post('/login', async (req, res) => {
     if(passwordMatch) {
 
       res.status(200).json({ message: 'Erfolgreiche Anmeldung!'})
+      console.log("Login erfolgreich!");
 
     } else {
 
       res.status(401).json({ message: 'Ungültige Anmeldeinformationen!'})
-    
+      console.log("Login fehlgeschlagen!");
+
     }
 
   } catch (error) {
