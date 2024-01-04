@@ -13,6 +13,8 @@ interface FormData {
 
 const Regist = () => {
 
+    let responseOK = false;
+
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState<FormData>({
@@ -23,6 +25,8 @@ const Regist = () => {
         password: '',
         repeatpassword: '',
     });
+
+    const [registrationError, setRegistrationError] = useState(false);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -44,7 +48,7 @@ const Regist = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('/regist', {
+            const response = await fetch('http://localhost:3000/regist', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -58,10 +62,14 @@ const Regist = () => {
             } else {
 
                 console.error('Fehler bei der Registrierung', response.statusText);
-                // Bool für fehler auf Komponente einrichten
+
+                setRegistrationError(true);
             }
         } catch (error) {
+
             console.error('Fehler bei Registrierung:', error);
+            setRegistrationError(true);
+
         }
     };
 
@@ -126,6 +134,8 @@ const Regist = () => {
 
                     <a href="" className="forget">Forget password?</a>
 
+                    {registrationError && <p>Registrierung fehlgeschlagen!</p>}
+                    
                     <button type="submit">Registrieren</button>
 
                     <button onClick={handleButtonClickLogin}>Back to Login</button>

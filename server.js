@@ -1,12 +1,16 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 import { PrismaClient } from "@prisma/client";
 
 const app = express()
 const port = 3000
 
 const prisma = new PrismaClient();
+
+app.use(cors());
+app.use(bodyParser.json());
 
 app.get('/keyboard/:id', async (req, res) => {
   const user = await prisma.user.findFirst({
@@ -20,8 +24,6 @@ app.get('/keyboard/:id', async (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-
-app.use(cors());
 
 // Regist
 app.post('/regist', async (req, res) => {
