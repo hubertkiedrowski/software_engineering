@@ -3,7 +3,6 @@ import "./css/login.css";
 import { useNavigate } from 'react-router-dom';
 
 interface FormData {
-    userId: number;
     userName: string;
     password: string
 }
@@ -13,7 +12,6 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState<FormData>({
-        userId: 0,
         userName: '',
         password: '',
     });
@@ -31,7 +29,7 @@ const Login = () => {
 
     const fetchUserId = async () => {
         try {
-            
+
             const response = await fetch('http://localhost:3000/getUserId', {
             // Annahme: Sie haben einen Endpunkt zum Abrufen der Benutzer-ID implementiert
             method: 'GET',
@@ -64,19 +62,22 @@ const Login = () => {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        await fetchUserId();
+
         try {
             const response = await fetch('http://localhost:3000/loginErfolgreich', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({...formData, userId}),
             });
 
             if(response.ok) {
-
+                const responseData = await response.json();
+                const userId = responseData.userId;
                 console.log('Benutzer erfolgreich eingeloggt!');
-                navigate('/loginErfolgreich', { state: { userId: formData.userId, userName: formData.userName} });
+                navigate('/loginErfolgreich', { state: { userId: userId, userName: formData.userName} });
 
             } else {
 
