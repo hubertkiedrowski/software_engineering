@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 interface FormData {
     userName: string;
+    email: string;
     password: string
 }
 
@@ -13,10 +14,10 @@ const Login = () => {
 
     const [formData, setFormData] = useState<FormData>({
         userName: '',
+        email: '',
         password: '',
     });
 
-    const [userId, setUserId] = useState<number | null>(null);
     const [loginError, setLoginError] = useState(false);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,61 +28,31 @@ const Login = () => {
         }))
     }
 
-    const fetchUserId = async () => {
-        try {
-
-            const response = await fetch('http://localhost:3000/getUserId', {
-            // Annahme: Sie haben einen Endpunkt zum Abrufen der Benutzer-ID implementiert
-            method: 'GET',
-            headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-        
-            if(response.ok) {
-
-                const responseData = await response.json();
-                const userId = responseData.userId;
-                setUserId(userId);
-
-            } else {
-
-                console.error('Fehler beim Abrufen der Benutzer-ID', response.statusText);
-                setLoginError(true);
-
-            }
-
-        } catch (error) {
-            console.error('Fehler beim Abrufen der Benutzer-ID:', error);
-            setLoginError(true);
-        }
-
-    }
-
-
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        await fetchUserId();
-
         try {
-            const response = await fetch('http://localhost:3000/loginErfolgreich', {
+            const authString = `${formData.email}:${formData.userName}:${formData.password}`;
+            const base64Auth = btoa(authString);
+
+            const response = await fetch('http://localhost:3000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Basic ${base64Auth}`,
                 },
-                body: JSON.stringify({...formData, userId}),
+                body: JSON.stringify(formData),
             });
 
             if(response.ok) {
-                const responseData = await response.json();
-                const userId = responseData.userId;
+                
                 console.log('Benutzer erfolgreich eingeloggt!');
-                navigate('/loginErfolgreich', { state: { userId: userId, userName: formData.userName} });
+                navigate('/loginErfolgreich', { state: { userName: formData.email } });
 
             } else {
 
                 console.error('Fehler beim Einloggen', response.statusText);
+                console.error('Fehler beim Einloggen:', await response.text());
                 setLoginError(true);
 
             }
@@ -114,6 +85,14 @@ const Login = () => {
                         type="text"
                         name="userName"
                         value={formData.userName}
+                        onChange={handleInputChange}
+                        className="innerForm" />
+
+                    <label className="innerForm" >Email</label>
+                    <input
+                        type="text"
+                        name="email"
+                        value={formData.email}
                         onChange={handleInputChange}
                         className="innerForm" />
 

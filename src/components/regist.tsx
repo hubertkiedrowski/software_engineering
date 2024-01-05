@@ -36,9 +36,7 @@ const Regist = () => {
 
     const handleButtonClickLogin = () => {
 
-        const targetPage = '/login';
-
-        navigate(targetPage);
+        navigate('/login');
 
     }
 
@@ -46,6 +44,7 @@ const Regist = () => {
         e.preventDefault();
 
         try {
+
             const response = await fetch('http://localhost:3000/regist', {
                 method: 'POST',
                 headers: {
@@ -55,13 +54,15 @@ const Regist = () => {
             });
 
             if(response.ok) {
+
                 console.log('Benutzer erfolgreich registriert!');
                 navigate('/login');
+
             } else {
 
                 console.error('Fehler bei der Registrierung', response.statusText);
-
                 setRegistrationError(true);
+
             }
         } catch (error) {
 
@@ -84,7 +85,7 @@ const Regist = () => {
                     <label className="innerForm" >Firstname</label>
                     <input 
                         type="text"
-                        name="firstname" 
+                        name="firstName" 
                         value={formData.firstName}
                         onChange={handleInputChange}
                         className="innerForm" />
@@ -92,7 +93,7 @@ const Regist = () => {
                     <label className="innerForm" >Lastname</label>
                     <input 
                         type="text"
-                        name="lastname" 
+                        name="lastName" 
                         value={formData.lastName}
                         onChange={handleInputChange}
                         className="innerForm" />
@@ -108,7 +109,7 @@ const Regist = () => {
                     <label className="innerForm" >Username</label>
                     <input 
                         type="text"
-                        name="username" 
+                        name="userName" 
                         value={formData.userName}
                         onChange={handleInputChange}
                         className="innerForm" />

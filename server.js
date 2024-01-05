@@ -25,22 +25,11 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-app.get('/getUserId', async (req, res) => {
-  try {
-    const userId = req.user.id;
-
-    res.status(200).json({ userId });
-  } catch (error) {
-    console.error('Fehler beim Abrufen der Benutzer-ID:', error);
-    res.status(500).json({ message: 'Interner Serverfehler' });
-  }
-});
-
 // Regist
 app.post('/regist', async (req, res) => {
   const{ firstname, lastname, email, username, password, repeatpassword } = req.body;
 
-  if (password === repeatpassword && firstname != null && lastname != null && email != null && username != null && password != null){
+  if (password == repeatpassword && firstname != "" && lastname != "" && email != "" && username != "" && password != "" && repeatpassword != ""){
 
     try {
     
@@ -68,23 +57,39 @@ app.post('/regist', async (req, res) => {
     }
 
   }else {
+    console.log('Empfangene Daten:', req.body);
+    console.log('Passwörter verglichen:', password, repeatpassword);
 
     console.log("Passwörter nicht gleich!")
-
+    res.status(400).json({ message: 'Passwörter stimmen nicht überein' });  
   }
   
 
 })
 
 // Login
-app.post('/loginErfolgreich', async (req, res) => {
-  const {userId, userName, password} = req.body;
+app.post('/login', async (req, res) => {
+  const authHeader = req.headers.authorization;
+
+  // Logge den Authorization-Header
+  console.log('Authorization-Header:', authHeader);
+
+  if(!authHeader || !authHeader.startsWith('Basic ')) {
+      return res.status(401).json({ message: 'Ungültige Anmeldeinformationen' });
+  }
+
+  const base64Credentials = authHeader.split(' ')[1];
+  const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
+  const [email, userName, password] = credentials.split(':');
+
+  // Logge die extrahierten Anmeldeinformationen
+  console.log('Extrahierte Anmeldeinformationen:', { email, userName, password });
 
   try {
 
     const user = await prisma.user.findUnique({
       where: {
-        id: userId,
+        email: email,
         userName: userName
       },
     });
@@ -94,10 +99,11 @@ app.post('/loginErfolgreich', async (req, res) => {
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
+    console.log("PasswordMatch: ", passwordMatch);
 
     if(passwordMatch) {
 
-      res.status(200).json({ userId: user.id, userName: user.userName })
+      res.status(200).json({ email: user.email, userName: user.userName })
       console.log("Login erfolgreich!");
 
     } else {

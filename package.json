@@ -24,6 +24,7 @@
   "proxy": "http://localhost:5000",
   "dependencies": {
     "@prisma/client": "^5.7.1",
+    "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^2.4.3",
     "bcryptjs-react": "^2.4.6",
     "cors": "^2.8.5",
@@ -37,7 +38,7 @@
     "sqlite": "^5.1.1"
   },
   "devDependencies": {
-    "@types/node": "^20.10.5",
+    "@types/node": "^20.10.6",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@vitejs/plugin-react": "^4.2.0",
