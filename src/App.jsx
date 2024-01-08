@@ -28,7 +28,9 @@ function App() {
         <Route exact path="/loginErfolgreich" element={<LoginErfolgreich />} />
       </Routes>
     </Router>
-  ); // apicall auf localhost:3000/user/ID
-  //react fetch data
+  );
+
+  // apicall auf localhost:3000/user/ID
+  // react fetch data
 }
 export default App;
