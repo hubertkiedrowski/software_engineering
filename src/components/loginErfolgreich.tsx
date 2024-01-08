@@ -6,7 +6,7 @@ const LoginErfolgreich = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const { username } = location.state;
+    const { userName } = location.state;
 
 
     return (
@@ -15,7 +15,7 @@ const LoginErfolgreich = () => {
 
                 <h1>Login Erfolgreich!</h1>
 
-                <h2>Willkommen {username}</h2>
+                <h2>Willkommen {userName}</h2>
 
             </div>
         </>

@@ -27,9 +27,9 @@ app.listen(port, () => {
 
 // Regist
 app.post('/regist', async (req, res) => {
-  const{ firstname, lastname, email, username, password, repeatpassword } = req.body;
+  const{ firstName, lastName, email, userName, password, repeatpassword } = req.body;
 
-  if (password == repeatpassword && firstname != "" && lastname != "" && email != "" && username != "" && password != "" && repeatpassword != ""){
+  if (password == repeatpassword && firstName != "" && lastName != "" && email != "" && userName != "" && password != "" && repeatpassword != ""){
 
     try {
     
@@ -39,9 +39,9 @@ app.post('/regist', async (req, res) => {
       const user = await prisma.user.create({
         data: {
           email: email,
-          firstName: firstname,
-          lastName: lastname,
-          userName: username,
+          firstName: firstName,
+          lastName: lastName,
+          userName: userName,
           password: hashedPassword,
         },
       });
@@ -74,7 +74,7 @@ app.post('/login', async (req, res) => {
   // Logge den Authorization-Header
   console.log('Authorization-Header:', authHeader);
 
-  if(!authHeader || !authHeader.startsWith('Basic ')) {
+  if(!authHeader || !authHeader.startsWith('Basic')) {
       return res.status(401).json({ message: 'Ungültige Anmeldeinformationen' });
   }
 
@@ -95,7 +95,7 @@ app.post('/login', async (req, res) => {
     });
 
     if(!user){
-      return res.status(401).json({ message: 'Ungültige Anmeldeinformationen' });
+      return res.status(401).json({ message: 'Ungültige Anmeldeinformationen2' });
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
@@ -108,7 +108,7 @@ app.post('/login', async (req, res) => {
 
     } else {
 
-      res.status(401).json({ message: 'Ungültige Anmeldeinformationen!'})
+      res.status(401).json({ message: 'Ungültige Anmeldeinformationen!3'})
       console.log("Login fehlgeschlagen!");
 
     }

@@ -1,6 +1,8 @@
 import React, { FormEvent, useState } from 'react';
 import "./css/login.css";
 import { useNavigate } from 'react-router-dom';
+import * as bcrypt from 'bcryptjs';
+
 
 interface FormData {
     userName: string;
@@ -34,6 +36,7 @@ const Login = () => {
         try {
             const authString = `${formData.email}:${formData.userName}:${formData.password}`;
             const base64Auth = btoa(authString);
+            console.log('Authentifizierungszeichenkette:', authString);
 
             const response = await fetch('http://localhost:3000/login', {
                 method: 'POST',
@@ -47,14 +50,15 @@ const Login = () => {
             if(response.ok) {
                 
                 console.log('Benutzer erfolgreich eingeloggt!');
-                navigate('/loginErfolgreich', { state: { userName: formData.email } });
+                navigate('/loginErfolgreich', { state: { userName: formData.userName } });
 
             } else {
 
                 console.error('Fehler beim Einloggen', response.statusText);
-                console.error('Fehler beim Einloggen:', await response.text());
-                setLoginError(true);
 
+                console.log('Fehlerobjekt:', await response.json());
+
+                setLoginError(true);
             }
         } catch (error) {
 
